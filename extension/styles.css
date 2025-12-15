@@ -1,0 +1,274 @@
+/* Popup Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 320px;
+    min-height: 480px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #0f131f;
+    /* Matches website dark theme */
+    color: #F9FAFB;
+}
+
+.popup-container {
+    padding: 16px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.logo {
+    width: 28px;
+    height: 28px;
+}
+
+.header h1 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #374151;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #6366F1;
+    /* Primary Brand Color */
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Status Card */
+.status-card {
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #374151;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.status-item:last-child {
+    margin-bottom: 0;
+}
+
+.status-label {
+    color: #9CA3AF;
+    font-size: 13px;
+}
+
+.status-value {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Keywords Section */
+.keywords-section {
+    margin-bottom: 20px;
+}
+
+.keywords-section h2 {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 8px 12px;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    color: #F9FAFB;
+    font-size: 13px;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #6366F1;
+}
+
+.input-group button {
+    padding: 8px 16px;
+    background: #6366F1;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.input-group button:hover {
+    background: #4F46E5;
+}
+
+/* Keywords List */
+.keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.keyword-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(99, 102, 241, 0.2);
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+    color: #e0e7ff;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.keyword-chip .remove-btn {
+    background: transparent;
+    border: none;
+    color: #a5b4fc;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.keyword-chip .remove-btn:hover {
+    color: #ef4444;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #6366F1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #4F46E5;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #374151;
+    color: #9CA3AF;
+}
+
+.btn-secondary:hover {
+    border-color: #6B7280;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    border-top: 1px solid #1f2937;
+    padding-top: 15px;
+}
+
+.footer a {
+    color: #6366F1;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4B5563;
+    border-radius: 2px;
+}

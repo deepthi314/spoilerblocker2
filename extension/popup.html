@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="popup-container">
+
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="icons/icon48.png" class="logo" alt="Logo">
+                <h1>Spoiler Blocker</h1>
+            </div>
+            <div class="toggle-container">
+                <label class="switch">
+                    <input type="checkbox" id="enableToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="status-card">
+            <div class="status-item">
+                <span class="status-label">Status</span>
+                <span class="status-value" id="status" style="color: #6366F1;">Protected ✓</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Blocked (Global)</span>
+                <span class="status-value" id="totalBlocked">0</span>
+            </div>
+        </div>
+
+        <!-- Quick Keywords -->
+        <div class="keywords-section">
+            <h2>Quick Add Keyword</h2>
+            <div class="input-group">
+                <input type="text" id="keywordInput" placeholder="Enter name or show...">
+                <button id="addKeywordBtn">Add</button>
+            </div>
+            <div id="keywordsList" class="keywords-list">
+                <!-- Keywords appear here -->
+                <p style="color: #6B7280; font-size: 12px; font-style: italic; width: 100%; text-align: center;">No
+                    custom keywords yet.</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button id="dashboardBtn" class="btn-primary">
+                Open Full Dashboard
+            </button>
+            <button id="refreshBtn" class="btn-secondary">
+                Sync & Refresh
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <a href="#" id="loginLink">Login to website to sync</a>
+        </div>
+
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

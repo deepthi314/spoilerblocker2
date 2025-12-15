@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Spoiler Blocker</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" fill="#6366F1" />
+                    </svg>
+                    Spoiler Blocker
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="overview">
+                    <span class="icon">🏠</span> Overview
+                </a>
+                <a href="#" class="nav-item" data-tab="detect">
+                    <span class="icon">🛡️</span> Live Detection
+                </a>
+                <a href="#" class="nav-item" data-tab="keywords">
+                    <span class="icon">🏷️</span> My Keywords
+                </a>
+                <a href="#" class="nav-item" data-tab="shows">
+                    <span class="icon">📺</span> Blocked Shows
+                </a>
+                <a href="#" class="nav-item" data-tab="settings">
+                    <span class="icon">⚙️</span> Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-secondary"
+                    style="width: 100%; border: 1px solid var(--border);">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="user-welcome">
+                    Welcome back, <span id="userName" style="color: var(--primary); font-weight: 600;">User</span>!
+                </div>
+                <div class="top-actions">
+                    <button class="icon-btn">🔔</button>
+                    <div class="user-avatar" id="userAvatar">U</div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content active fade-in">
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="card-icon" style="background: rgba(99, 102, 241, 0.2); color: var(--primary);">
+                                🚫</div>
+                            <div class="card-info">
+                                <h3 id="dashTotalBlocked">0</h3>
+                                <p>Spoilers Blocked</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="background: rgba(16, 185, 129, 0.2); color: var(--success);">
+                                👁️</div>
+                            <div class="card-info">
+                                <h3 id="dashTotalScanned">0</h3>
+                                <p>Items Scanned</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="card-icon" style="background: rgba(245, 158, 11, 0.2); color: var(--warning);">
+                                🔑</div>
+                            <div class="card-info">
+                                <h3 id="dashActiveKeywords">0</h3>
+                                <p>Active Keywords</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-container" style="margin-top: 24px;">
+                        <h2>Recent Activity</h2>
+                        <div id="activityFeed" class="activity-feed">
+                            <div class="loading-state">Loading activity...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Detection Tab -->
+                <div id="detect-tab" class="tab-content">
+                    <h2>Live Spoiler Check</h2>
+                    <div class="panel">
+                        <textarea id="liveInput" class="demo-input" placeholder="Paste text to scan..."></textarea>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+                            <button class="btn btn-primary" onclick="initiateScan()">Scan Now</button>
+                        </div>
+                        <div id="liveResult" class="result-panel" style="margin-top: 20px;"></div>
+                    </div>
+
+                    <h3 style="margin-top: 32px;">Recent Scans</h3>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Content</th>
+                                    <th>Result</th>
+                                    <th>Risk</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scanHistoryTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Keywords Tab -->
+                <div id="keywords-tab" class="tab-content">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h2>My Keywords</h2>
+                        <button class="btn btn-primary" onclick="toggleAddKeyword()">+ Add Keyword</button>
+                    </div>
+
+                    <div id="addKeywordPanel" class="panel" style="display: none; margin-bottom: 24px;">
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="newKeywordInput" placeholder="Enter keyword (e.g. Iron Man)">
+                            <select id="newKeywordCategory" style="width: 150px;">
+                                <option value="general">General</option>
+                                <option value="movie">Movie</option>
+                                <option value="tv">TV Show</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="addKeyword()">Add</button>
+                        </div>
+                    </div>
+
+                    <div id="keywordsList" class="keywords-grid">
+                        <!-- Chips go here -->
+                    </div>
+                </div>
+
+                <!-- Shows Tab -->
+                <div id="shows-tab" class="tab-content">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h2>Blocked Shows</h2>
+                        <button class="btn btn-primary" onclick="toggleAddShow()">+ Add Show</button>
+                    </div>
+
+                    <div id="addShowPanel" class="panel" style="display: none; margin-bottom: 24px;">
+                        <input type="text" id="newShowInput" placeholder="Show Title">
+                        <div style="margin-top: 10px; text-align: right;">
+                            <button class="btn btn-primary" onclick="addShow()">Add Show</button>
+                        </div>
+                    </div>
+
+                    <div id="showsGrid" class="shows-grid">
+                        <!-- Show cards go here -->
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <h2>Settings</h2>
+                    <div class="panel" style="max-width: 600px;">
+                        <div class="form-group">
+                            <label>Sensitivity Level</label>
+                            <select id="settingSensitivity">
+                                <option value="low">Low (Only major spoilers)</option>
+                                <option value="medium">Medium (Recommended)</option>
+                                <option value="high">High (Strict blocking)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <label style="margin: 0;">Auto-Block Content</label>
+                            <input type="checkbox" id="settingAutoBlock" style="width: auto;">
+                        </div>
+                        <div class="form-group"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <label style="margin: 0;">Show Notifications</label>
+                            <input type="checkbox" id="settingNotify" style="width: auto;">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast-container"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
