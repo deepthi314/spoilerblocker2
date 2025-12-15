@@ -32,3 +32,4 @@ npx serve frontend
 
 ## License
 MIT
+"# spoilerblocker2" 
